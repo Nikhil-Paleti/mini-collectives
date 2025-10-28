@@ -28,7 +28,7 @@ Collective time ≈ (number of steps)·α + (bytes per slowest rank)·β.
 
 ---
 
-## 📦 Collectives
+## Collectives
 
 | Collective | Used in ML for | Approx. cost per GPU (× message size) | Appears in | Description / When used |
 |---|---|---:|---|---|
@@ -44,9 +44,8 @@ Collective time ≈ (number of steps)·α + (bytes per slowest rank)·β.
 **MoE note:** real workloads often have imbalanced token counts per expert → variable message sizes → practically an `Alltoallv`.  
 You can approximate this with `Alltoall` by padding to equal lengths.
 
----
 
-### ⚙️ Practical Notes
+### Practical Notes
 
 - **Overlap & bucketing:** Frameworks bucket gradients (e.g., 25–50 MB) and overlap `allreduce` / `reduce-scatter` with backward compute to hide latency.  
 - **Precision:** Communicate in **fp16 / bf16** whenever numerically safe; halves communication volume vs fp32.  
